@@ -1,0 +1,37 @@
+﻿@page "/login"
+@using System.Speech.Synthesis;
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <link href="~/css/bootsrap/bootstrap.min.css" type="text/css">
+    <link href="~/style.css" type="text/css">
+</head>
+
+<body>
+    <div class="input-group"></div>
+    <div class="container" style="height: 600px;">
+        <div class="card mb-5" style="margin-top: 100px;height: 410px;">
+            <div class="card-body d-flex flex-column align-items-center" style="position: relative;">
+                <div class="bs-icon-xl bs-icon-circle bs-icon-primary bs-icon my-4" style="border-top-left-radius: 0;border-top-right-radius: 0;border-bottom-right-radius: 0;border-bottom-left-radius: 0;color: rgb(255,255,255);background: var(--bs-card-bg);"><img src="image/logo.png" style="width: 80px;height: 80px;border-top-left-radius: 50%;border-top-right-radius: 50%;border-bottom-right-radius: 50%;border-bottom-left-radius: 50%;" /></div>
+                <form class="text-center" method="post">
+                    <div class="mb-3"><input class="form-control" type="email" name="email" placeholder="Email" /></div>
+                    <div class="mb-3"><input class="form-control" type="password" name="password" placeholder="Password" /></div>
+                    <div class="mb-3"><button class="btn btn-primary d-block w-100" type="submit">Login</button></div>
+                    <p class="text-muted">Forgot your password?</p>
+                    <div><button @onclick="Test" class="btn btn-primary" type="button" style="width: 207px;color: var(--bs-gray-dark);border-color: var(--bs-black);background: var(--bs-card-bg);"><img width="25" height="25" style="width: 25px;height: 25px;" src="image/google.png" />Login With Google</button></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+@code{
+    public void Test()
+    {
+        
+    }
+}
