@@ -1,0 +1,71 @@
+﻿@page "/"
+@using IA_Blazor.Models
+@inject Services.GptService gptService
+<html lang="en" style>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no" />
+    <title>chat</title>
+</head>
+
+<body>
+    <div class="container">
+        <section class="py-4 py-xl-5">
+            <div class="container">
+                <div class="text-center p-4 p-lg-5">
+                    <p class="fw-bold text-primary mb-2">Chatter avec GPT</p>
+                    <h1 class="fw-bold mb-4">C&#39;est aussi simple que ça 🤖</h1>
+                </div>
+            </div>
+        </section>
+    </div>
+    <div class="container" style="height: 500px;overflow: auto;">
+        @foreach(var t in messageFronts)
+        {
+            @if(t.Type == MessageType.Question)
+            {
+                <div class="text-white bg-dark border rounded border-0 p-4 p-md-5" style="color: var(--bs-indigo);background: var(--bs-indigo); margin-top:40px;">
+                    <h1 style="font-size: 15px;text-decoration: underline;">Votre question:</h1>
+                    <p class="mb-4">@t.Content</p>
+                </div>
+            }
+            @if(t.Type == MessageType.Response)
+            {
+                <div class="bg-light border rounded border-0 border-light d-flex flex-column justify-content-between flex-lg-row p-4 p-md-5" style="margin-top: 40px;">
+                    <div class="pb-2 pb-lg-1">
+                        <h1 style="font-size: 15px;text-decoration: underline;">Réponse:</h1>
+                        <p class="mb-0">@t.Content</p>
+                    </div>
+                    <div class="my-2"></div>
+                </div>
+            }
+
+        }
+    </div>
+    <div class="container" style="margin-top: 20px;">
+        <section>
+            <div class="input-group">
+                <input class="form-control" @bind="Question" type="text" /><button @onclick="OnClickButton" class="btn btn-primary" type="button" style="background: var(--bs-gray-dark);">
+                    <svg class="bi bi-send" xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 16 16">
+                        <path fill-rule="evenodd" d="M15.854.146a.5.5 0 0 1 .11.54l-5.819 14.547a.75.75 0 0 1-1.329.124l-3.178-4.995L.643 7.184a.75.75 0 0 1 .124-1.33L15.314.037a.5.5 0 0 1 .54.11ZM6.636 10.07l2.761 4.338L14.13 2.576 6.636 10.07Zm6.787-8.201L1.591 6.602l4.339 2.76 7.494-7.493Z"></path>
+                    </svg>
+                </button>
+            </div>
+        </section>
+    </div>
+</body>
+
+</html>
+
+@code {
+    public async Task OnClickButton()
+    {
+        messageFronts.Add(new MessageFront(Question, MessageType.Question));
+        var result = await gptService.SendQuestion(Question);
+        messageFronts.Add(new MessageFront(result, MessageType.Response));
+    }
+    List<MessageFront> messageFronts = new List<MessageFront>();
+    public string Question { get; set; }
+}
+
