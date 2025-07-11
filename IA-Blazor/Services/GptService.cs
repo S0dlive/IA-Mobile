@@ -34,7 +34,7 @@ namespace IA_Blazor.Services
                         Content = question,
                     }
                 },
-                Model = "gpt-3.5-turbo-0301"
+                Model = "gpt-3.5-turbo-0301" // select model as you wish 
             };
             string json = JsonSerializer.Serialize(chatRequest);
             var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
