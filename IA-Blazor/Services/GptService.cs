@@ -23,7 +23,7 @@ namespace IA_Blazor.Services
             HttpRequestMessage requestMessage = new HttpRequestMessage();
             requestMessage.Method = HttpMethod.Post;
             requestMessage.RequestUri = new Uri("https://api.openai.com/v1/chat/completions");
-            requestMessage.Headers.Add($"Authorization", "Bearer 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");
+            requestMessage.Headers.Add($"Authorization", "Bearer yourkey"); // Last key dosnt work ( i'm not idiot ) 
             ChatRequest chatRequest = new ChatRequest()
             {
                 Messages = new List<Message>
